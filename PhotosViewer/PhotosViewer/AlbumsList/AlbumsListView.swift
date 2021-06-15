@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxSwiftExt
 
 protocol AlbumsListTableViewDataSourceProtocol {
     var numOfSections : Int { get }
@@ -16,12 +19,53 @@ protocol AlbumsListTableViewDataSourceProtocol {
 }
 class AlbumsListView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet var tableView: UITableView!
+    let dataSourceRelay = BehaviorRelay<AlbumsListTableViewDataSourceProtocol?>(value: nil)
+    let cellConfig = BehaviorRelay<AlbumsListTableViewCellViewConfigProtocol?>(value : nil)
+    let disposeBag = DisposeBag()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
     }
-    */
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    func  commonInit() {
+        addXib()
+        setupBindings()
+    }
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: AlbumsListTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: AlbumsListTableViewCell.reuseIdentifier)
+    }
+    func setupBindings() {
+        dataSourceRelay
+            .unwrap()
+            .flatMap{$0.reload}
+            .bind(to: tableView.rx.reload)
+            .disposed(by: disposeBag)
+    }
 
+}
+
+extension AlbumsListView : UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataSourceRelay.value?.numOfSections ?? 0
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSourceRelay.value?.numOfItems(in: section) ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: AlbumsListTableViewCell.reuseIdentifier, for: indexPath)
+        guard let data = dataSourceRelay.value?.item(for: indexPath), let albumsListCell = tableViewCell as? AlbumsListTableViewCell else {
+            return UITableViewCell()
+        }
+        albumsListCell.viewConfig = cellConfig.value
+        albumsListCell.updateCell(with: data)
+        return albumsListCell
+    }
+    
+    
 }
