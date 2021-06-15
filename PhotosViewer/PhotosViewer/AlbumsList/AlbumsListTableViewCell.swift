@@ -7,12 +7,22 @@
 //
 
 import UIKit
-
+protocol AlbumsListTableViewCellViewConfigProtocol {
+    var titleLabelFont : UIFont? { get }
+    var titleLabelColor : UIColor? { get }
+    
+}
 protocol AlbumsListTableViewCellDataSourceProtocol {
     var title : String? { get }
 }
 class AlbumsListTableViewCell: UITableViewCell {
 
+    var viewConfig : AlbumsListTableViewCellViewConfigProtocol? {
+        didSet {
+            titleLabel.font = viewConfig?.titleLabelFont
+            titleLabel.textColor = viewConfig?.titleLabelColor
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
