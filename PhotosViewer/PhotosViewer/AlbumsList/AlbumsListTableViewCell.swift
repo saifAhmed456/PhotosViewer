@@ -17,6 +17,7 @@ protocol AlbumsListTableViewCellDataSourceProtocol {
 }
 class AlbumsListTableViewCell: UITableViewCell {
 
+    @IBOutlet var titleLabel: UILabel!
     var viewConfig : AlbumsListTableViewCellViewConfigProtocol? {
         didSet {
             titleLabel.font = viewConfig?.titleLabelFont
