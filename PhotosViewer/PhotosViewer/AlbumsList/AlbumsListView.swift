@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol AlbumsListTableViewDataSourceProtocol {
+    var numOfSections : Int { get }
+    func numOfItems(in section : Int) -> Int
+    func item(for indexPath : IndexPath) -> AlbumsListTableViewCellDataSourceProtocol?
+    var reload : PublishSubject<Void> { get }
+}
 class AlbumsListView: UIView {
 
     /*
