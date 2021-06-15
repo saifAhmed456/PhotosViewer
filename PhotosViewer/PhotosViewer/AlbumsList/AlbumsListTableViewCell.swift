@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol AlbumsListTableViewCellDataSourceProtocol {
+    var title : String? { get }
+}
 class AlbumsListTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
@@ -19,6 +22,9 @@ class AlbumsListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    func updateCell(with data : AlbumsListTableViewCellDataSourceProtocol) {
+        titleLabel.text = data.title
     }
 
 }
