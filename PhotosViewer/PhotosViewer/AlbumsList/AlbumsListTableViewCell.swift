@@ -16,7 +16,10 @@ protocol AlbumsListTableViewCellDataSourceProtocol {
     var title : String? { get }
 }
 class AlbumsListTableViewCell: UITableViewCell {
-
+    static let reuseIdentifier = "AlbumsListTableViewCell"
+    static var nibName : String {
+        return reuseIdentifier
+    }
     @IBOutlet var titleLabel: UILabel!
     var viewConfig : AlbumsListTableViewCellViewConfigProtocol? {
         didSet {
