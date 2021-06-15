@@ -33,3 +33,10 @@ extension UIView {
     }
 }
 
+extension Reactive where Base: UITableView {
+    var reload: Binder<Void> {
+        return Binder(base) { (tableView, _) in
+           tableView.reloadData()
+        }
+    }
+}
