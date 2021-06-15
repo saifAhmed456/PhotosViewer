@@ -6,7 +6,9 @@ target 'PhotosViewer' do
   use_frameworks!
 
   # Pods for PhotosViewer
-
+  pod 'Moya/RxSwift', '~> 14.0'
+pod 'RxCocoa', '~> 5.0'
+pod 'RxSwiftExt', '~> 5.0'
   target 'PhotosViewerTests' do
     inherit! :search_paths
     # Pods for testing
