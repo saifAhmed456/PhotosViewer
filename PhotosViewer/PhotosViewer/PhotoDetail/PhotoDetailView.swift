@@ -7,15 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxSwiftExt
 
 class PhotoDetailView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+    
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    @IBOutlet var imageView: UIImageView!
+     
 }

@@ -1,7 +1,64 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uZ8-qL-Qfg">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="eWl-gG-eVO">
+            <objects>
+                <viewController id="uZ8-qL-Qfg" customClass="PhotoDetailViewController" customModule="PhotosViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bHx-y0-nav" customClass="PhotoDetailView" customModule="PhotosViewer" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="SCH-0c-lFx">
+                                <rect key="frame" x="197" y="443" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="buH-fP-Tfa">
+                                <rect key="frame" x="15" y="261" width="384" height="384"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="buH-fP-Tfa" secondAttribute="height" id="Jww-Fp-XTN"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="800" id="mQ9-bu-4no"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WVb-Bp-OvP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="buH-fP-Tfa" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WVb-Bp-OvP" secondAttribute="top" constant="15" id="0iD-6Y-eCy"/>
+                            <constraint firstItem="SCH-0c-lFx" firstAttribute="centerY" secondItem="buH-fP-Tfa" secondAttribute="centerY" id="38h-qV-4FX"/>
+                            <constraint firstItem="buH-fP-Tfa" firstAttribute="centerX" secondItem="WVb-Bp-OvP" secondAttribute="centerX" id="KGU-BU-bfY"/>
+                            <constraint firstItem="buH-fP-Tfa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WVb-Bp-OvP" secondAttribute="leading" constant="15" id="M0o-be-WpN"/>
+                            <constraint firstItem="buH-fP-Tfa" firstAttribute="centerY" secondItem="WVb-Bp-OvP" secondAttribute="centerY" id="MvP-ZN-XN1"/>
+                            <constraint firstItem="SCH-0c-lFx" firstAttribute="centerX" secondItem="buH-fP-Tfa" secondAttribute="centerX" id="WEq-er-L6i"/>
+                            <constraint firstItem="WVb-Bp-OvP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="buH-fP-Tfa" secondAttribute="trailing" constant="15" id="eGf-tz-gih"/>
+                            <constraint firstItem="WVb-Bp-OvP" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="buH-fP-Tfa" secondAttribute="bottom" constant="15" id="gTm-m6-sdH"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="imageView" destination="buH-fP-Tfa" id="pdB-Vy-fes"/>
+                            <outlet property="spinner" destination="SCH-0c-lFx" id="VRp-Lg-qaV"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="i1e-B0-a7o"/>
+                    <connections>
+                        <outlet property="navItem" destination="i1e-B0-a7o" id="LJT-Mt-hew"/>
+                        <outlet property="photoDetailView" destination="bHx-y0-nav" id="zML-8t-0wQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JvP-Gz-N9A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-254" y="103"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
