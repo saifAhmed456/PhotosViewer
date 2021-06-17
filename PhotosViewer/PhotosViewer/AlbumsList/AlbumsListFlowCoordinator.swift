@@ -25,7 +25,8 @@ class AlbumsListFlowCoordinator : AlbumsListFlowCoordinating {
     return albumsViewController
     }
     
-    func goToPhotosList(for albumID : Int) {
-        
+    func goToPhotosList(for albumID : Int,albumtitle : String?) {
+        let photosListVC = PhotosListFlowCoordinator.prepareView(for: albumID, albumTitle: albumtitle, with: navigator)
+        navigator?.pushViewController(photosListVC, animated: true)
     }
 }
