@@ -24,8 +24,6 @@
 		B064487E2679F809001851BF /* AlbumsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B064487D2679F809001851BF /* AlbumsListViewModel.swift */; };
 		B06448832679F818001851BF /* AlbumsListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06448822679F818001851BF /* AlbumsListFlowCoordinator.swift */; };
 		B07138D426790236002FB07D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07138D326790236002FB07D /* AppDelegate.swift */; };
-		B07138D626790236002FB07D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07138D526790236002FB07D /* ViewController.swift */; };
-		B07138D926790236002FB07D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07138D726790236002FB07D /* Main.storyboard */; };
 		B07138DB26790237002FB07D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B07138DA26790237002FB07D /* Assets.xcassets */; };
 		B07138DE26790237002FB07D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07138DC26790237002FB07D /* LaunchScreen.storyboard */; };
 		B07138E926790237002FB07D /* PhotosViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07138E826790237002FB07D /* PhotosViewerTests.swift */; };
@@ -74,8 +72,6 @@
 		B06448822679F818001851BF /* AlbumsListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsListFlowCoordinator.swift; sourceTree = "<group>"; };
 		B07138D026790236002FB07D /* PhotosViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07138D326790236002FB07D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B07138D526790236002FB07D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B07138D826790236002FB07D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B07138DA26790237002FB07D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B07138DD26790237002FB07D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B07138DF26790237002FB07D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -203,8 +199,6 @@
 				B064484D26792DD7001851BF /* Networking */,
 				B064482826790456001851BF /* AlbumsList */,
 				B07138D326790236002FB07D /* AppDelegate.swift */,
-				B07138D526790236002FB07D /* ViewController.swift */,
-				B07138D726790236002FB07D /* Main.storyboard */,
 				B07138DA26790237002FB07D /* Assets.xcassets */,
 				B07138DC26790237002FB07D /* LaunchScreen.storyboard */,
 				B07138DF26790237002FB07D /* Info.plist */,
@@ -349,7 +343,6 @@
 				B07138DB26790237002FB07D /* Assets.xcassets in Resources */,
 				B06448352679048F001851BF /* AlbumsListView.xib in Resources */,
 				B064483F267905FB001851BF /* AlbumsListTableViewCell.xib in Resources */,
-				B07138D926790236002FB07D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +571,6 @@
 				B06448832679F818001851BF /* AlbumsListFlowCoordinator.swift in Sources */,
 				B06448612679F3CD001851BF /* PhotoViewerNetworking.swift in Sources */,
 				B064485C2679F254001851BF /* PhotosListResponse.swift in Sources */,
-				B07138D626790236002FB07D /* ViewController.swift in Sources */,
 				B07138D426790236002FB07D /* AppDelegate.swift in Sources */,
 				B0644857267930FE001851BF /* AlbumsListResponse.swift in Sources */,
 				B06448792679F7B7001851BF /* AlbumsListViewController.swift in Sources */,
@@ -618,14 +610,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B07138D726790236002FB07D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B07138D826790236002FB07D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B07138DC26790237002FB07D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
