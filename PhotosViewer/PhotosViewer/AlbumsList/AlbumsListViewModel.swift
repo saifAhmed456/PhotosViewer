@@ -29,6 +29,7 @@ class AlbumsListViewModel {
     let reload = PublishSubject<Void>()
     let disposeBag = DisposeBag()
     let indexPathSelected = PublishSubject<IndexPath>()
+    let animateSpinner = BehaviorRelay<Bool>(value: false)
     let flowCoordinator : AlbumsListFlowCoordinating
     
     init(flowCoordinator : AlbumsListFlowCoordinating) {
@@ -42,14 +43,23 @@ class AlbumsListViewModel {
         view.indexPathSelected
             .bind(to: indexPathSelected)
             .disposed(by: disposeBag)
+        
+        animateSpinner
+            .bind(to: view.animateSpinner)
+            .disposed(by: disposeBag)
     }
     
     func fetchAlbumsList() {
+        animateSpinner.accept(true)
         let albumsListEndpoint = PhotoViewerEndpoint.albumsList
+        
         networking.request(endpoint: albumsListEndpoint)
-            .map([Album].self)
-            .debug("", trimOutput: true)
+            .map([Album]?.self)
             .asObservable()
+            .do(onDispose : {[weak self] () in
+                self?.animateSpinner.accept(false)
+                
+            })
             .bind(to: albumsList)
             .disposed(by: disposeBag)
         
