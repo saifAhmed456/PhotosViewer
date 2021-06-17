@@ -17,16 +17,16 @@ protocol BaseListTableViewDataSourceProtocol {
     var numOfSections : Int { get }
     func numOfItems(in section : Int) -> Int
     func item(for indexPath : IndexPath)
-    var reload : PublishSubject<Void> { get }
+    var reload : BehaviorSubject<Void> { get }
 }
 extension BaseListTableViewDataSourceProtocol {
     func item(for indexPath : IndexPath) {
-        fatalError("This is a abstract method.")
+        fatalError("This is an abstract method.")
     }
 }
 
 class BaseListView: UIView {
-
+    static let nibName = "BaseListView"
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     @IBOutlet var tableView: UITableView!
@@ -45,7 +45,7 @@ class BaseListView: UIView {
         commonInit()
     }
     func  commonInit() {
-        addXib(withName: "BaseListView")
+        addXib(withName: BaseListView.nibName)
         tableView.delegate = self
         setupBindings()
     }
@@ -54,10 +54,14 @@ class BaseListView: UIView {
             .bind(to: spinner.rx.isAnimating)
             .disposed(by: disposeBag)
     }
-    
+
 }
 extension BaseListView : UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
