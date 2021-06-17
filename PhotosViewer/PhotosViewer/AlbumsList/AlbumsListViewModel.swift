@@ -26,7 +26,7 @@ class AlbumsListViewModel {
     
     let networking = Networking.shared
     let albumsList = BehaviorRelay<[Album]?>(value: nil)
-    let reload = PublishSubject<Void>()
+    let reload = BehaviorSubject<Void>(value: ())
     let disposeBag = DisposeBag()
     let indexPathSelected = PublishSubject<IndexPath>()
     let animateSpinner = BehaviorRelay<Bool>(value: false)

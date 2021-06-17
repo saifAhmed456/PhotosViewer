@@ -7,3 +7,4 @@
 //
 
 import Foundation
+    var reload = BehaviorSubject<Void>(value: ())
