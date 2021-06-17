@@ -29,5 +29,9 @@ class PhotosListFlowCoordinator : PhotosListFlowCoordinating{
         return vc
     }
     
+    func goToPhotoDetails(with url: URL, title: String?) {
+        let vc = PhotoDetailFlowCoordinator.prepareView(with: url, photoTitle: title, navigator: navigator)
+        navigator?.pushViewController(vc, animated: true)
+    }
     
 }
