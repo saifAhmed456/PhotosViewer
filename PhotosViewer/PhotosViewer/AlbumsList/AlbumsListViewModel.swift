@@ -20,11 +20,11 @@ struct AlbumsListTableViewCellData : AlbumsListTableViewCellDataSourceProtocol {
 }
 
 protocol AlbumsListFlowCoordinating  {
-    func goToPhotosList(for albumID : Int)
+    func goToPhotosList(for albumID : Int,albumtitle : String?)
 }
 class AlbumsListViewModel {
     
-    let networking = Networking()
+    let networking = Networking.shared
     let albumsList = BehaviorRelay<[Album]?>(value: nil)
     let reload = PublishSubject<Void>()
     let disposeBag = DisposeBag()
@@ -70,6 +70,22 @@ class AlbumsListViewModel {
             .map{_ in return }
             .bind(to: reload)
             .disposed(by: disposeBag)
+        
+        indexPathSelected.withLatestFrom(albumsList,resultSelector: { (indexPath, albumsList) -> Album? in
+            guard indexPath.row < (albumsList?.count ?? 0) else { return nil }
+            return albumsList?[indexPath.row]
+        })
+        .subscribe(onNext : {[weak self] album in
+            guard let id = album?.id else {
+                print("Can not show list of photos for album - \(String(describing: album)), reason : album id is nil")
+                return
+            }
+            self?.flowCoordinator.goToPhotosList(for: id, albumtitle: album?.title)
+            
+        })
+        .disposed(by: disposeBag)
+        
+        
     }
     
 }
