@@ -11,40 +11,29 @@ import RxSwift
 import RxCocoa
 import RxSwiftExt
 
-protocol AlbumsListTableViewDataSourceProtocol {
-    var numOfSections : Int { get }
-    func numOfItems(in section : Int) -> Int
-    func item(for indexPath : IndexPath) -> AlbumsListTableViewCellDataSourceProtocol?
-    var reload : PublishSubject<Void> { get }
-}
-@IBDesignable class AlbumsListView: UIView {
+protocol AlbumsListTableViewDataSourceProtocol : BaseListTableViewDataSourceProtocol{
 
-    @IBOutlet var tableView: UITableView!
-    let dataSourceRelay = BehaviorRelay<AlbumsListTableViewDataSourceProtocol?>(value: nil)
-    let cellConfig = BehaviorRelay<AlbumsListTableViewCellViewConfigProtocol?>(value : nil)
-    let disposeBag = DisposeBag()
+    func item(for indexPath : IndexPath) -> AlbumsListTableViewCellDataSourceProtocol?
+
+}
+@IBDesignable class AlbumsListView: BaseListView {
+
     
-    var indexPathSelected : Observable<IndexPath> {
-        return tableView.rx.itemSelected.asObservable()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    func  commonInit() {
-        addXib()
+    let dataSourceRelay = BehaviorRelay<AlbumsListTableViewDataSourceProtocol?>(value: nil)
+   // let cellConfig = BehaviorRelay<AlbumsListTableViewCellViewConfigProtocol?>(value : nil)
+    
+    
+
+   override func  commonInit() {
+        super.commonInit()
         setupTableView()
-        setupBindings()
     }
     func setupTableView() {
         tableView.dataSource = self
         tableView.register(UINib(nibName: AlbumsListTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: AlbumsListTableViewCell.reuseIdentifier)
     }
-    func setupBindings() {
+   override func setupBindings() {
+    super.setupBindings()
         dataSourceRelay
             .unwrap()
             .flatMap{$0.reload}
@@ -67,15 +56,11 @@ extension AlbumsListView : UITableViewDataSource {
         guard let data = dataSourceRelay.value?.item(for: indexPath), let albumsListCell = tableViewCell as? AlbumsListTableViewCell else {
             return UITableViewCell()
         }
-        albumsListCell.viewConfig = cellConfig.value
+        //albumsListCell.viewConfig = cellConfig.value
         albumsListCell.updateCell(with: data)
         return albumsListCell
     }
     
     
 }
-extension AlbumsListView : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-}
+

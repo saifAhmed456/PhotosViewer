@@ -21,12 +21,12 @@ class AlbumsListTableViewCell: UITableViewCell {
         return reuseIdentifier
     }
     @IBOutlet var titleLabel: UILabel!
-    var viewConfig : AlbumsListTableViewCellViewConfigProtocol? {
-        didSet {
-            titleLabel.font = viewConfig?.titleLabelFont
-            titleLabel.textColor = viewConfig?.titleLabelColor
-        }
-    }
+//    var viewConfig : AlbumsListTableViewCellViewConfigProtocol? {
+//        didSet {
+//            titleLabel.font = viewConfig?.titleLabelFont
+//            titleLabel.textColor = viewConfig?.titleLabelColor
+//        }
+//    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
