@@ -7,24 +7,33 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
+protocol AlbumsListViewControllerProtocol  {
+    var dataSourceRelay : BehaviorRelay<AlbumsListTableViewDataSourceProtocol?> { get }
+    var indexPathSelected : Observable<IndexPath> { get }
+}
 class AlbumsListViewController: UIViewController {
 
+    @IBOutlet var albumsListView: AlbumsListView!
+    var  viewModel : AlbumsListViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        viewModel?.setupBindings(with : self)
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+extension AlbumsListViewController : AlbumsListViewControllerProtocol {
+    var dataSourceRelay: BehaviorRelay<AlbumsListTableViewDataSourceProtocol?> {
+        return albumsListView.dataSourceRelay
     }
-    */
-
+    
+    var indexPathSelected: Observable<IndexPath> {
+        return albumsListView.indexPathSelected
+    }
+    
+    
 }
