@@ -9,9 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
-protocol AlbumsListViewControllerProtocol  {
+protocol AlbumsListViewControllerProtocol : BaseListViewControllerProtocol {
     var dataSourceRelay : BehaviorRelay<AlbumsListTableViewDataSourceProtocol?> { get }
-    var indexPathSelected : Observable<IndexPath> { get }
+
 }
 class AlbumsListViewController: UIViewController {
 
@@ -27,6 +27,10 @@ class AlbumsListViewController: UIViewController {
 }
 
 extension AlbumsListViewController : AlbumsListViewControllerProtocol {
+    var animateSpinner: PublishSubject<Bool> {
+        return albumsListView.animateSpinner
+    }
+    
     var dataSourceRelay: BehaviorRelay<AlbumsListTableViewDataSourceProtocol?> {
         return albumsListView.dataSourceRelay
     }
