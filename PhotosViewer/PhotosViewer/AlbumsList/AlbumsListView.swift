@@ -17,12 +17,16 @@ protocol AlbumsListTableViewDataSourceProtocol {
     func item(for indexPath : IndexPath) -> AlbumsListTableViewCellDataSourceProtocol?
     var reload : PublishSubject<Void> { get }
 }
-class AlbumsListView: UIView {
+@IBDesignable class AlbumsListView: UIView {
 
     @IBOutlet var tableView: UITableView!
     let dataSourceRelay = BehaviorRelay<AlbumsListTableViewDataSourceProtocol?>(value: nil)
     let cellConfig = BehaviorRelay<AlbumsListTableViewCellViewConfigProtocol?>(value : nil)
     let disposeBag = DisposeBag()
+    
+    var indexPathSelected : Observable<IndexPath> {
+        return tableView.rx.itemSelected.asObservable()
+    }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
@@ -33,6 +37,7 @@ class AlbumsListView: UIView {
     }
     func  commonInit() {
         addXib()
+        setupTableView()
         setupBindings()
     }
     func setupTableView() {
@@ -68,4 +73,9 @@ extension AlbumsListView : UITableViewDataSource {
     }
     
     
+}
+extension AlbumsListView : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
