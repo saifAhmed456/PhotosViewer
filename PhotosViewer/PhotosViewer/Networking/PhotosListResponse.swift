@@ -7,3 +7,15 @@
 //
 
 import Foundation
+struct Photo : Decodable {
+    var title : String?
+    var photoURL : String?
+    var thumbnailURL : String?
+    
+    enum CodingKeys :String, CodingKey {
+        case title
+        case photoURL = "url"
+        case thumbnailURL = "thumbnailUrl"
+        
+    }
+}
