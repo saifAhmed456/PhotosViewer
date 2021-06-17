@@ -7,6 +7,18 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import RxSwiftExt
+
+struct AlbumsListTableViewCellData : AlbumsListTableViewCellDataSourceProtocol {
+    var title: String?
+    
+    init(album : Album) {
+        self.title = album.title
+    }
+}
+
 protocol AlbumsListFlowCoordinating  {
     func goToPhotosList(for albumID : Int)
 }
@@ -49,5 +61,23 @@ class AlbumsListViewModel {
             .bind(to: reload)
             .disposed(by: disposeBag)
     }
+    
+}
+
+extension AlbumsListViewModel : AlbumsListTableViewDataSourceProtocol {
+    var numOfSections: Int {
+        return 1
+    }
+    
+    func numOfItems(in section: Int) -> Int {
+        return albumsList.value?.count ?? 0
+    }
+    
+    func item(for indexPath: IndexPath) -> AlbumsListTableViewCellDataSourceProtocol? {
+        guard  indexPath.row < (albumsList.value?.count ?? 0), let album = albumsList.value?[indexPath.row] else { return nil }
+        return AlbumsListTableViewCellData(album: album)
+        
+    }
+    
     
 }
