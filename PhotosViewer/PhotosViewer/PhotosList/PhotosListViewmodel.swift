@@ -12,8 +12,17 @@ import RxCocoa
 import RxSwiftExt
 import Moya
 
+enum ImageDownloadError : Error {
+    case missingURL
+}
 protocol PhotosListFlowCoordinating {
     func goToPhotoDetails(with url : URL, title : String?)
+}
+struct PhotosListTableViewCellData : PhotoListTableViewCellDataSourceProtocol {
+    var title: String?
+    
+    var imageSingleEvent: Single<UIImage?>
+    
 }
 class PhotosListViewModel {
     let flowCoordinator : PhotosListFlowCoordinating
@@ -83,4 +92,39 @@ class PhotosListViewModel {
         
        
     }
+}
+extension PhotosListViewModel : PhotosListTableViewDataSourceProtocol {
+    func item(for indexPath: IndexPath) -> PhotoListTableViewCellDataSourceProtocol? {
+        guard indexPath.row < (photosList.value?.count ?? 0) else {
+            return nil
+        }
+        let photo = photosList.value?[indexPath.row]
+        let singleEvent = fetchThumbnailImageEvent(for: photo?.thumbnailURL)
+        return PhotosListTableViewCellData(title: photo?.title, imageSingleEvent: singleEvent)
+        
+    }
+    
+    var numOfSections: Int {
+        return 1
+    }
+    
+    func numOfItems(in section: Int) -> Int {
+        return photosList.value?.count ?? 0
+    }
+    func fetchThumbnailImageEvent(for urlString : String?) -> Single<UIImage?> {
+      
+        guard let urlString = urlString, let url = URL(string: urlString) else {
+           
+            return .error(ImageDownloadError.missingURL)
+        }
+        let endpoint = PhotoViewerEndpoint.photoData(url: url)
+       return  self.networking.request(endpoint: endpoint)
+        .map { (response) -> UIImage? in
+            return UIImage(data: response.data)
+        }
+        
+        
+    }
+     
+    
 }
