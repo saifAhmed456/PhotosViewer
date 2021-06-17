@@ -7,24 +7,45 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
+import RxSwiftExt
+protocol PhotosListViewControllerProtocol : BaseListViewControllerProtocol {
+    var dataSourceRelay : BehaviorRelay<PhotosListTableViewDataSourceProtocol?> { get }
+    var navItemTitle : Binder<String?> { get }
+}
 class PhotoListViewController: UIViewController {
 
+    @IBOutlet var navItem: UINavigationItem!
+    @IBOutlet var photosListView: PhotosListView!
+    var viewModel : PhotosListViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.setupBindings(with: self)
 
         // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+extension PhotoListViewController : PhotosListViewControllerProtocol {
+    var navItemTitle: Binder<String?> {
+        return navItem.rx.title
     }
-    */
-
+    
+    var dataSourceRelay: BehaviorRelay<PhotosListTableViewDataSourceProtocol?> {
+        return photosListView.dataSourceRelay
+    }
+    
+    var indexPathSelected: Observable<IndexPath> {
+        return photosListView.indexPathSelected
+    }
+    
+    var animateSpinner: PublishSubject<Bool> {
+        return photosListView.animateSpinner
+    }
+    
+    
 }
