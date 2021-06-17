@@ -7,3 +7,27 @@
 //
 
 import Foundation
+import Moya
+import RxSwift
+import RxCocoa
+
+let MEMORY_CAPACITY = 4 * 1024 * 1024
+let DISK_CAPACITY =  20 * 1024 * 1024
+
+class Networking {
+    
+    
+
+    let cache = Foundation.URLCache(memoryCapacity: MEMORY_CAPACITY, diskCapacity: DISK_CAPACITY, diskPath: nil)
+    
+    init() {
+        URLCache.shared = cache
+    }
+   private var provider = MoyaProvider<PhotoViewerEndpoint>(plugins : [MoyaCacheablePlugin()])
+    
+    func request(endpoint : PhotoViewerEndpoint) -> Single<Response> {
+        return provider.rx.request(endpoint)
+    }
+    
+    
+}

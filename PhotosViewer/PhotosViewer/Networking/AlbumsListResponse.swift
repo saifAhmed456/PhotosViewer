@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct Album : Decodable {
+    var id : Int?
+    var title : String?
+}
