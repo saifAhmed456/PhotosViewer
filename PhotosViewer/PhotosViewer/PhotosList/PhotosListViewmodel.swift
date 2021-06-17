@@ -7,4 +7,5 @@
 //
 
 import Foundation
+    let networking = Networking.shared
     var reload = BehaviorSubject<Void>(value: ())

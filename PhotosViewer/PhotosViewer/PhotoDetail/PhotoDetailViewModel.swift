@@ -7,3 +7,4 @@
 //
 
 import Foundation
+    let networking = Networking.shared
