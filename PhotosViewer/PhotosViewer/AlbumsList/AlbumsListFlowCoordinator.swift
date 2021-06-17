@@ -24,4 +24,8 @@ class AlbumsListFlowCoordinator : AlbumsListFlowCoordinating {
     flowCoordinator.navigator = navigator
     return albumsViewController
     }
+    
+    func goToPhotosList(for albumID : Int) {
+        
+    }
 }
